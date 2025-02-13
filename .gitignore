@@ -12,6 +12,7 @@
 /bin/
 /pkg/
 /build/
+/tmp/
 *.test
 *.coverprofile
 

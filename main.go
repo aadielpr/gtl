@@ -1,40 +1,35 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"os"
+	"net/http"
+	"time"
 
-	"github.com/aadielpr/gtl/country"
+	components "github.com/aadielpr/gtl/templates/components"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	fmt.Println("Initial commit.")
+	r := gin.Default()
 
-	f, err := os.Open("countries.json")
+	r.GET("/", func(c *gin.Context) {
+		c.Status(http.StatusOK)
+		components.Hello("My Website", "World").Render(c, c.Writer)
+	})
+
+	s := &http.Server{
+		Addr:           ":8080",
+		Handler:        r,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	err := s.ListenAndServe()
 	if err != nil {
-		fmt.Println("Error when opening file: ", err)
+		fmt.Println("Error when starting server:", err)
 		return
 	}
 
-	defer f.Close()
-
-	byte, err := io.ReadAll(f)
-	if err != nil {
-		fmt.Println("Error when reading file: ", err)
-		return
-	}
-
-	var countries []country.Country
-
-	err = json.Unmarshal(byte, &countries)
-	if err != nil {
-		fmt.Println("Error when Unmarshaling: ", err)
-		return
-	}
-
-	jsonData, err := json.MarshalIndent(countries, "", " ")
-
-	fmt.Println(string(jsonData))
+	fmt.Println("Server running on port: 8080")
 }
