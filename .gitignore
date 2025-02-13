@@ -1,0 +1,64 @@
+# Binaries and build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+*.o
+*.a
+*.log
+
+# Go build artifacts
+/bin/
+/pkg/
+/build/
+*.test
+*.coverprofile
+
+# macOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS system files
+Icon?
+._*
+
+# Go modules
+/go.sum
+/go/pkg/
+go.work
+go.work.sum
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
+*.swp
+*.swo
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache/
+*.bak
+
+# Coverage and test results
+*.cover
+*.testresult
+*.prof
+
+# Go race detector
+*.race
+
+# Generated documentation
+/docs/
+/godoc/
+
+# Private keys and credentials (if any)
+*.pem
+*.key
+*.crt
+*.env
+countries.json
